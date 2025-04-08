@@ -1,0 +1,374 @@
+:root {
+    --primary: #5ddbcb;
+    --primary-gradient: linear-gradient(135deg, #7cff9b 0%, #5ddbc7 100%);
+    --text-primary: #1a1a1a;
+    --text-secondary: #666;
+    --background: #ffffff;
+    --surface: #f8f9fa;
+    --border-radius: 12px;
+    --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    --transition: 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-weight: 400;
+}
+
+body {
+    background: var(--background);
+    color: var(--text-primary);
+    min-height: 100vh;
+    line-height: 1.5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.app-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.logo-gif {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.main-content {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+}
+
+.hero-title {
+    font-size: 36px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+}
+
+.hero-subtitle {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto 32px;
+}
+
+.search-container {
+    margin: 0 auto 24px;
+    width: 100%;
+}
+
+.search-box {
+    background: white;
+    border-radius: 14px;
+    padding: 20px 20px;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+    border: 3px solid #e5e5e5;
+    width: 100%;
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px 0;
+    border: none;
+    font-size: 15px;
+    font-weight: 400;
+    color: #333;
+    transition: var(--transition);
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 16px;
+}
+
+.search-input::placeholder {
+    color: #333;
+    opacity: 1;
+}
+
+.search-input:focus {
+    outline: none;
+}
+
+.search-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.left-controls {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.integration-icons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.integration-icon {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    display: flex;
+}
+
+.github-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.google-icon {
+    color: #4285F4;
+}
+
+.integration-count {
+    color: #888;
+    font-size: 13px;
+    font-weight: 500;
+    margin-left: 2px;
+    display: flex;
+    align-items: center;
+}
+
+.toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.toggle-switch {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    width: 40px;
+    height: 22px;
+    cursor: pointer;
+}
+
+.toggle-switch input {
+    display: none;
+}
+
+.toggle-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #ddd;
+    border-radius: 24px;
+    transition: var(--transition);
+}
+
+.toggle-slider:before {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    top: 3px;
+    left: 3px;
+    transition: var(--transition);
+}
+
+.toggle-switch input:checked + .toggle-slider {
+    background: #5F5EF1;
+}
+
+.toggle-switch input:checked + .toggle-slider:before {
+    transform: translateX(18px);
+}
+
+.toggle-label {
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mic-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    color: #8E8EA0;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    height: 36px;
+}
+
+.mic-btn:hover {
+    color: #666;
+}
+
+.mic-btn svg {
+    width: 22px;
+    height: 22px;
+}
+
+.send-btn {
+    background: #5F5EF1;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.send-btn:hover {
+    background: #4f4edb;
+}
+
+.send-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+.category-nav {
+    display: flex;
+    gap: 4px;
+    margin: 0 auto 24px;
+    justify-content: center;
+    overflow-x: visible;
+    padding: 4px 0;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 800px;
+}
+
+.category-nav::-webkit-scrollbar {
+    display: none;
+}
+
+.category-btn {
+    background: white;
+    border: 1px solid #e0e0e0;
+    padding: 6px 8px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #666;
+    cursor: pointer;
+    transition: var(--transition);
+    white-space: nowrap;
+    text-align: center;
+    min-width: fit-content;
+}
+
+.category-btn:hover {
+    border-color: #ccc;
+    color: #333;
+}
+
+.category-btn.active {
+    background: #2dd4a3;
+    color: #fff;
+    border-color: #2dd4a3;
+}
+
+.suggested-tasks {
+    margin-top: 24px;
+}
+
+.suggested-tasks h2 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+}
+
+.task-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+}
+
+.task-card {
+    background: #F7F7F7;
+    border-radius: var(--border-radius);
+    padding: 14px;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.task-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.task-card h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--text-primary);
+}
+
+.task-card p {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 32px;
+    }
+    
+    .hero-subtitle {
+        font-size: 16px;
+    }
+    
+    .search-box {
+        padding: 16px;
+    }
+    
+    .category-nav {
+        margin-top: 20px;
+        gap: 6px;
+    }
+    
+    .category-btn {
+        padding: 5px 8px;
+        font-size: 12px;
+    }
+} 

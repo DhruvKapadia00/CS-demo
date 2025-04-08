@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coworker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+</head>
+<body>
+    <div class="app-container">
+        <div class="logo-container">
+            <img src="images/Logo.gif" alt="Logo" class="logo-gif">
+        </div>
+
+        <div class="main-content">
+            <h1 class="hero-title">Information to action in seconds.</h1>
+            <p class="hero-subtitle">Coworker deeply understands your company. It answers, analyzes, and does work across all your connected apps and data.</p>
+
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="What are the potential security vulnerabilities in our user data">
+                    
+                    <div class="search-controls">
+                        <div class="left-controls">
+                            <div class="integration-icons">
+                                <img src="images/github.png" alt="GitHub" class="integration-icon github-icon">
+                                <img src="images/download.png" alt="Slack" class="integration-icon">
+                                <span class="integration-count">20+</span>
+                            </div>
+                            
+                            <div class="toggle-container">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                                <span class="toggle-label">OM1</span>
+                            </div>
+                        </div>
+                        
+                        <div class="action-buttons">
+                            <button class="mic-btn" aria-label="Voice input">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M19 10v2a7 7 0 0 1-14 0v-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M12 19v4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M8 23h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                            <button class="send-btn" aria-label="Send">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-nav">
+                <button class="category-btn">Operations</button>
+                <button class="category-btn">Product</button>
+                <button class="category-btn active">Engineering</button>
+                <button class="category-btn">Marketing</button>
+                <button class="category-btn">Sales</button>
+                <button class="category-btn">Customer Success</button>
+                <button class="category-btn">Leadership</button>
+                <button class="category-btn">HR / People</button>
+            </div>
+
+            <section class="suggested-tasks">
+                <h2>Suggested Tasks</h2>
+                <div class="task-list">
+                    <div class="task-card">
+                        <h3>Chat with codebase</h3>
+                        <p>What are the potential security vulnerabilities in our user data handling?</p>
+                    </div>
+                    <div class="task-card">
+                        <h3>Draft PRs based on Jira tickets</h3>
+                        <p>Triage our high priority bug tickets and draft a PR for each</p>
+                    </div>
+                    <div class="task-card">
+                        <h3>Generate context-aware code from terminal</h3>
+                        <p>Create a unified validation function referencing our security best practices</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
