@@ -25,8 +25,8 @@ body {
     line-height: 1.5;
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding: 20px;
+    align-items: flex-start;
+    padding: 10px 20px 0;
 }
 
 .app-container {
@@ -37,19 +37,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.logo-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-.logo-gif {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    object-fit: cover;
+    padding-top: 10px;
 }
 
 .main-content {
@@ -78,7 +66,7 @@ body {
 }
 
 .search-container {
-    margin: 0 auto 24px;
+    margin: 0 auto 16px;
     width: 100%;
 }
 
@@ -266,7 +254,7 @@ body {
 .category-nav {
     display: flex;
     gap: 4px;
-    margin: 0 auto 24px;
+    margin: 0 auto 16px;
     justify-content: center;
     overflow-x: visible;
     padding: 4px 0;
@@ -302,32 +290,32 @@ body {
 }
 
 .category-btn.active {
-    background: #2dd4a3;
+    background: black;
     color: #fff;
-    border-color: #2dd4a3;
+    border-color: black;
 }
 
 .suggested-tasks {
-    margin-top: 24px;
+    margin-top: 16px;
 }
 
 .suggested-tasks h2 {
     font-size: 16px;
     font-weight: 600;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
     color: var(--text-primary);
 }
 
 .task-list {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 8px;
+    gap: 6px;
 }
 
 .task-card {
     background: #F7F7F7;
     border-radius: var(--border-radius);
-    padding: 14px;
+    padding: 12px;
     transition: var(--transition);
     cursor: pointer;
 }
