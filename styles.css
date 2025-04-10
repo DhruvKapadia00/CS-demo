@@ -105,18 +105,22 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: nowrap;
 }
 
 .left-controls {
     display: flex;
     align-items: center;
     gap: 20px;
+    flex-shrink: 0;
 }
 
 .integration-icons {
     display: flex;
     align-items: center;
     gap: 8px;
+    flex-shrink: 0;
+    min-width: 65px;
 }
 
 .integration-icon {
@@ -148,6 +152,8 @@ body {
     display: flex;
     align-items: center;
     gap: 6px;
+    flex-shrink: 0;
+    min-width: 65px;
 }
 
 .toggle-switch {
@@ -369,16 +375,21 @@ body {
     
     .left-controls {
         gap: 10px;
+        flex-shrink: 0;
+        width: auto;
+        min-width: 170px;
     }
     
     .search-controls {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: nowrap;
         gap: 12px;
     }
     
     .action-buttons {
-        align-self: flex-end;
+        flex-shrink: 0;
+        margin-left: auto;
     }
 }
 
@@ -428,27 +439,45 @@ body {
         font-size: 14px;
         margin-bottom: 6px;
     }
+    
+    .left-controls {
+        min-width: 170px;
+        flex-shrink: 0;
+    }
+    
+    .search-controls {
+        flex-direction: row;
+        align-items: center;
+    }
+    
+    .action-buttons {
+        flex-shrink: 0;
+    }
 }
 
 /* Very small screens */
 @media (max-width: 360px) {
     .search-controls {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
+        flex-wrap: wrap;
+        gap: 8px;
     }
     
     .left-controls {
         width: 100%;
         justify-content: space-between;
+        min-width: unset;
     }
     
     .action-buttons {
-        align-self: flex-end;
-        margin-top: 5px;
+        margin-left: auto;
+        margin-top: 4px;
     }
     
     .search-input {
         font-size: 13px;
+    }
+    
+    .search-box {
+        padding: 10px;
     }
 } 
