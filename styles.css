@@ -77,6 +77,7 @@ body {
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
     border: 3px solid #e5e5e5;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .search-input {
@@ -89,8 +90,6 @@ body {
     transition: var(--transition);
     font-family: 'Inter', sans-serif;
     margin-bottom: 16px;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .search-input::placeholder {
@@ -106,14 +105,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
 }
 
 .left-controls {
     display: flex;
     align-items: center;
     gap: 20px;
-    flex-wrap: wrap;
 }
 
 .integration-icons {
@@ -267,6 +264,7 @@ body {
     flex-wrap: wrap;
     width: 100%;
     max-width: 800px;
+    -webkit-overflow-scrolling: touch;
 }
 
 .category-nav::-webkit-scrollbar {
@@ -358,16 +356,19 @@ body {
         margin-top: 20px;
         gap: 6px;
         overflow-x: auto;
-        flex-wrap: nowrap;
-        padding-bottom: 8px;
         justify-content: flex-start;
+        padding: 4px 4px;
+        flex-wrap: nowrap;
     }
     
     .category-btn {
         padding: 5px 8px;
         font-size: 12px;
         white-space: nowrap;
-        flex-shrink: 0;
+    }
+    
+    .left-controls {
+        gap: 10px;
     }
     
     .search-controls {
@@ -376,49 +377,26 @@ body {
         gap: 12px;
     }
     
-    .left-controls {
-        width: 100%;
-        justify-content: space-between;
-    }
-    
     .action-buttons {
-        width: 100%;
-        justify-content: flex-end;
-    }
-    
-    .task-list {
-        gap: 8px;
+        align-self: flex-end;
     }
 }
 
-@media (min-width: 640px) {
-    .task-list {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 12px;
-    }
-}
-
-@media (min-width: 481px) and (max-width: 639px) {
-    .task-list {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-    }
-}
-
+/* Additional media query for very small screens */
 @media (max-width: 480px) {
-    body {
-        padding: 10px 12px 0;
-    }
-    
     .app-container {
         padding: 0 10px;
+    }
+    
+    .search-box {
+        padding: 12px;
+        border-width: 2px;
     }
     
     .search-input {
         font-size: 14px;
         padding: 10px 0;
+        margin-bottom: 12px;
     }
     
     .task-card {
@@ -433,9 +411,44 @@ body {
         font-size: 12px;
     }
     
-    .task-list {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 8px;
+    .integration-icons {
+        gap: 4px;
+    }
+    
+    .integration-icon {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .toggle-container {
+        gap: 4px;
+    }
+    
+    .suggested-tasks h2 {
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+    .search-controls {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .left-controls {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .action-buttons {
+        align-self: flex-end;
+        margin-top: 5px;
+    }
+    
+    .search-input {
+        font-size: 13px;
     }
 } 
