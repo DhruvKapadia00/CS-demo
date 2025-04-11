@@ -3,7 +3,7 @@
     --primary-gradient: linear-gradient(135deg, #7cff9b 0%, #5ddbc7 100%);
     --text-primary: #1a1a1a;
     --text-secondary: #666;
-    --background: #ffffff;
+    --background: #F8F7F8;
     --surface: #f8f9fa;
     --border-radius: 12px;
     --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -321,7 +321,7 @@ body {
 }
 
 .task-card {
-    background: #F7F7F7;
+    background: #EDECEF;
     border-radius: var(--border-radius);
     padding: 12px;
     transition: var(--transition);
