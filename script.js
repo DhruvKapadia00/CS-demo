@@ -114,9 +114,9 @@ function fillSearch(query) {
                 currentBackspaceInterval = null;
                 
                 // Start typing the new text after a small delay
-                setTimeout(() => startTypingNewText(query, searchInput), 100);
+                setTimeout(() => startTypingNewText(query, searchInput), 50);
             }
-        }, 20); // Same speed as typing
+        }, 8); // Much faster backspace speed
     } else {
         // If no existing text, start typing immediately
         startTypingNewText(query, searchInput);
@@ -136,7 +136,7 @@ function startTypingNewText(query, searchInput) {
             searchInput.value = query; // Remove cursor
             isTypingInProgress = false;
         }
-    }, 20); // Same speed as backspace
+    }, 8); // Much faster typing speed
 }
 
 // Function to cycle through suggestions
