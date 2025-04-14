@@ -1,77 +1,3 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Elements
-    const searchInput = document.querySelector('.search-input');
-    const sendButton = document.querySelector('.send-btn');
-    const micButton = document.querySelector('.mic-btn');
-    const orgMemoryToggle = document.querySelector('.toggle-switch input');
-
-    // Search functionality
-    function handleSearch(query) {
-        if (!query.trim()) return;
-        
-        // Animate the send button
-        sendButton.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-            sendButton.style.transform = '';
-        }, 100);
-
-        // Clear the input
-        searchInput.value = '';
-        
-        // Log the query (replace with actual search implementation)
-        console.log('Searching:', query);
-    }
-
-    // Event listeners for search
-    searchInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            handleSearch(e.target.value);
-        }
-    });
-
-    sendButton.addEventListener('click', () => {
-        handleSearch(searchInput.value);
-    });
-
-    // Voice input simulation
-    micButton.addEventListener('click', () => {
-        micButton.classList.add('active');
-        
-        // Simulate voice recording
-        setTimeout(() => {
-            micButton.classList.remove('active');
-            searchInput.value = 'Voice input processing...';
-            
-            // Clear the simulation after 1.5s
-            setTimeout(() => {
-                searchInput.value = '';
-            }, 1500);
-        }, 1000);
-    });
-
-    // Organizational Memory toggle
-    orgMemoryToggle.addEventListener('change', (e) => {
-        const isEnabled = e.target.checked;
-        console.log('Organizational Memory:', isEnabled ? 'enabled' : 'disabled');
-        
-        // Add visual feedback
-        const toggleLabel = document.querySelector('.toggle-label');
-        toggleLabel.style.opacity = '0.7';
-        setTimeout(() => {
-            toggleLabel.style.opacity = '';
-        }, 200);
-    });
-
-    // Add input animations
-    searchInput.addEventListener('focus', () => {
-        searchInput.style.transform = 'scale(1.005)';
-    });
-
-    searchInput.addEventListener('blur', () => {
-        searchInput.style.transform = '';
-    });
-});
-
 // Category suggestions for different tabs
 const categorySuggestions = {
     "operations": [
@@ -156,44 +82,24 @@ function fillSearch(query) {
     const searchInput = document.querySelector('.search-input');
     if (!searchInput) return;
     
-    const currentText = searchInput.value.replace('|', ''); // Remove any cursor
-    
-    // Clear any ongoing animations
+    // Clear any ongoing animations and reset the input
     if (currentBackspaceInterval) clearInterval(currentBackspaceInterval);
     if (currentTypeInterval) clearInterval(currentTypeInterval);
-    
-    // First backspace the current text 
-    if (currentText.length > 0) {
-        let currentLength = currentText.length;
-        currentBackspaceInterval = setInterval(() => {
-            if (currentLength > 0) {
-                searchInput.value = currentText.substring(0, currentLength - 1) + '|';
-                currentLength--;
-            } else {
-                clearInterval(currentBackspaceInterval);
-                currentBackspaceInterval = null;
-                typeNewQuery();
-            }
-        }, 15);
-    } else {
-        typeNewQuery();
-    }
+    searchInput.value = '';
     
     // Type the new query
-    function typeNewQuery() {
-        let i = 0;
-        currentTypeInterval = setInterval(() => {
-            if (i < query.length) {
-                searchInput.value = query.substring(0, i + 1) + '|';
-                i++;
-            } else {
-                clearInterval(currentTypeInterval);
-                currentTypeInterval = null;
-                searchInput.value = query; // Remove cursor
-                isTypingInProgress = false;
-            }
-        }, 20);
-    }
+    let i = 0;
+    currentTypeInterval = setInterval(() => {
+        if (i < query.length) {
+            searchInput.value = query.substring(0, i + 1) + '|';
+            i++;
+        } else {
+            clearInterval(currentTypeInterval);
+            currentTypeInterval = null;
+            searchInput.value = query; // Remove cursor
+            isTypingInProgress = false;
+        }
+    }, 20);
 }
 
 // Function to cycle through suggestions
