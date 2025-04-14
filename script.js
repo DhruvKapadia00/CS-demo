@@ -74,35 +74,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Category suggestions for different tabs
 const categorySuggestions = {
-    "engineering": [
-        { text: "Chat with codebase", query: "What are the potential security vulnerabilities in our user data handling?" },
-        { text: "Draft PRs based on Jira tickets", query: "Triage our high priority bug tickets and draft a PR for each" },
-        { text: "Generate context-aware code from terminal", query: "Create a unified validation function referencing our security best practices" }
+    "operations": [
+        { text: "Track metrics & run analysis", query: "Update the QBR with the most recent metrics" },
+        { text: "Document our processes", query: "Create processes based on our most recent onboarding calls" },
+        { text: "Aggregate customer feedback", query: "Can aggregate customer feedback and prioritize it for the product team" }
     ],
     "product": [
-        { text: "Create Jira tickets", query: "File the bugs we just discussed in the Standup meeting" },
-        { text: "Draft context-aware product and eng docs", query: "Do some research then turn our product jam into a PRD" },
-        { text: "Aggregate customer insights", query: "What customer feedback haven't we actioned yet?" }
+        { text: "Aggregate customer insights", query: "What customer feedback haven't we actioned yet?" },
+        { text: "Research and draft PRD", query: "Do some research then turn our product jam into a PRD" },
+        { text: "Create JIRA tickets", query: "File the bugs we just discussed in the Standup meeting" }
+    ],
+    "engineering": [
+        { text: "Chat with codebase", query: "What are the potential security vulnerabilities in our user data handling?" },
+        { text: "Draft PRs in GitHub based on Jira tickets", query: "Triage our high priority bug tickets and draft a PR for each" },
+        { text: "Write context-aware code", query: "Create a unified validation function referencing our security best practices" }
     ],
     "marketing": [
         { text: "Generate content", query: "Create landing page copy based on our most recent product releases" },
-        { text: "Market research", query: "Research how to position this release against similar offerings in market" },
-        { text: "Campaign analysis", query: "Analyze the impact that this campaign had on key business metrics" }
-    ],
-    "operations": [
-        { text: "Metrics tracking & analysis", query: "Update the QBR with the most recent metrics" },
-        { text: "Process documentation", query: "Create processes based on our most recent onboarding calls" },
-        { text: "Aggregate feedback", query: "Can aggregate customer feedback and prioritize it for the product team" }
+        { text: "Do market research", query: "Research how to position this release against similar offerings in market" },
+        { text: "Analyze campaigns", query: "Analyze the impact that this campaign had on key business metrics" }
     ],
     "sales": [
         { text: "Score sales calls", query: "Score my team's 10 most recent sales calls" },
-        { text: "Research prospects", query: "Research how today's prospects could use our product" },
-        { text: "Automate follow ups", query: "Draft follow ups for today's calls" }
+        { text: "Research today's prospects", query: "Research how today's prospects could use our product" },
+        { text: "Draft follow-up email", query: "Draft follow ups for today's calls" }
     ],
-    "customer-success": [
+    "support": [
         { text: "Analyze support feedback", query: "Identify trends and recurring issues across our customers" },
         { text: "Track customer health", query: "Identify at risk accounts based on engagement metrics and comms" },
-        { text: "Create context-aware documentation", query: "Can you generate FAQs based on recent customer calls" }
+        { text: "Create FAQs", query: "Can you generate FAQs based on recent customer calls" }
     ],
     "leadership": [
         { text: "Generate team updates", query: "Create a summary of what different teams got done this week" },
@@ -110,9 +110,9 @@ const categorySuggestions = {
         { text: "Track OKRs & projects", query: "Analyze our progress towards Q1 OKRs" }
     ],
     "hr-people": [
-        { text: "Performance reviews", query: "Write comprehensive perf reviews by synthesizing last quarter's work and feedback" },
-        { text: "New hire onboarding", query: "Draft an onboarding plan for a front-end engineer" },
-        { text: "Recruiting pipeline analytics", query: "Track our funnel metrics. Where and why are we losing candidates?" }
+        { text: "Draft team reviews", query: "Write comprehensive perf reviews by synthesizing last quarter's work and feedback" },
+        { text: "Onboard a new hire", query: "Draft an onboarding plan for a front-end engineer" },
+        { text: "Analyze recruiting funnel", query: "Track our funnel metrics. Where and why are we losing candidates?" }
     ]
 };
 
@@ -140,13 +140,9 @@ function updateSuggestedTasks(category) {
         const title = document.createElement('h3');
         title.textContent = suggestion.text;
         
-        const description = document.createElement('p');
-        description.textContent = suggestion.query;
-        
         taskCard.appendChild(title);
-        taskCard.appendChild(description);
         
-        // Add click event to fill the search input
+        // Add click event to fill the search input with the full query
         taskCard.addEventListener('click', () => {
             fillSearch(suggestion.query);
         });
