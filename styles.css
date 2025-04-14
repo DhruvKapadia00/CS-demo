@@ -271,6 +271,7 @@ body {
     width: 100%;
     max-width: 800px;
     -webkit-overflow-scrolling: touch;
+    padding: 0 20px;
 }
 
 .category-nav::-webkit-scrollbar {
@@ -304,28 +305,37 @@ body {
 }
 
 .suggested-tasks {
-    margin-top: 16px;
+    margin-top: 2rem;
+    padding: 0 1.5rem;
 }
 
 .suggested-tasks h2 {
-    font-size: 16px;
+    font-size: 1.25rem;
     font-weight: 600;
-    margin-bottom: 8px;
-    color: var(--text-primary);
+    color: #1a1a1a;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
 }
 
 .task-list {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .task-card {
     background: #EDECEF;
     border-radius: var(--border-radius);
-    padding: 12px;
-    transition: var(--transition);
+    padding: 1rem;
     cursor: pointer;
+    transition: var(--transition);
+    height: 48px;
+    display: flex;
+    align-items: center;
 }
 
 .task-card:hover {
@@ -333,16 +343,33 @@ body {
 }
 
 .task-card h3 {
-    font-size: 15px;
-    font-weight: 600;
-    margin-bottom: 4px;
+    font-size: 0.875rem;
+    font-weight: 500;
     color: var(--text-primary);
+    margin: 0;
+    line-height: 1.2;
+    position: relative;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.task-card p {
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--text-secondary);
+.task-card h3::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url('images/village-logo.png') no-repeat center center;
+    background-size: contain;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+/* Remove the data-length specific styles */
+.task-card h3[data-length="long"] {
+    font-size: 0.875rem;
 }
 
 @media (max-width: 768px) {
@@ -363,8 +390,11 @@ body {
         gap: 6px;
         overflow-x: auto;
         justify-content: flex-start;
-        padding: 4px 4px;
+        padding: 4px 20px;
         flex-wrap: nowrap;
+        max-width: calc(100% - 40px);
+        margin-left: auto;
+        margin-right: auto;
     }
     
     .category-btn {
@@ -391,9 +421,25 @@ body {
         flex-shrink: 0;
         margin-left: auto;
     }
+    
+    .task-list {
+        gap: 0.625rem;
+        padding: 0 1rem;
+    }
+    
+    .task-card {
+        height: 44px;
+    }
+    
+    .task-card h3 {
+        font-size: 0.875rem;
+    }
+    
+    .task-card h3[data-length="long"] {
+        font-size: 0.875rem;
+    }
 }
 
-/* Additional media query for very small screens */
 @media (max-width: 480px) {
     .app-container {
         padding: 0 10px;
@@ -410,16 +456,22 @@ body {
         margin-bottom: 12px;
     }
     
+    .task-list {
+        gap: 0.5rem;
+        padding: 0 0.75rem;
+    }
+    
     .task-card {
-        padding: 10px;
+        height: 40px;
+        padding: 0.875rem;
     }
     
     .task-card h3 {
-        font-size: 14px;
+        font-size: 0.875rem;
     }
     
-    .task-card p {
-        font-size: 12px;
+    .task-card h3[data-length="long"] {
+        font-size: 0.875rem;
     }
     
     .integration-icons {
@@ -453,9 +505,18 @@ body {
     .action-buttons {
         flex-shrink: 0;
     }
+    
+    .task-card h3::before {
+        width: 14px;
+        height: 14px;
+    }
+    
+    .category-nav {
+        padding: 4px 12px;
+        max-width: calc(100% - 24px);
+    }
 }
 
-/* Very small screens */
 @media (max-width: 360px) {
     .search-controls {
         flex-wrap: wrap;
@@ -479,5 +540,14 @@ body {
     
     .search-box {
         padding: 10px;
+    }
+    
+    .task-list {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+    }
+    
+    .task-card {
+        padding: 0.75rem;
     }
 } 

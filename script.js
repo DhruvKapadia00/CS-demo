@@ -28,7 +28,7 @@ const categorySuggestions = {
     "support": [
         { text: "Analyze support feedback", query: "Identify trends and recurring issues across our customers" },
         { text: "Track customer health", query: "Identify at risk accounts based on engagement metrics and comms" },
-        { text: "Create FAQs", query: "Can you generate FAQs based on recent customer calls" }
+        { text: "Create context-aware documentation", query: "Can you generate FAQs based on recent customer calls" }
     ],
     "leadership": [
         { text: "Generate team updates", query: "Create a summary of what different teams got done this week" },
