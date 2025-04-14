@@ -82,12 +82,49 @@ function fillSearch(query) {
     const searchInput = document.querySelector('.search-input');
     if (!searchInput) return;
     
-    // Clear any ongoing animations and reset the input
-    if (currentBackspaceInterval) clearInterval(currentBackspaceInterval);
-    if (currentTypeInterval) clearInterval(currentTypeInterval);
-    searchInput.value = '';
+    // Clear any ongoing animations
+    if (currentBackspaceInterval) {
+        clearInterval(currentBackspaceInterval);
+        currentBackspaceInterval = null;
+    }
+    if (currentTypeInterval) {
+        clearInterval(currentTypeInterval);
+        currentTypeInterval = null;
+    }
+    if (cycleTimeout) {
+        clearTimeout(cycleTimeout);
+        cycleTimeout = null;
+    }
     
-    // Type the new query
+    // Set typing state
+    isTypingInProgress = true;
+    
+    // Get current text
+    const currentText = searchInput.value.replace('|', '');
+    let currentLength = currentText.length;
+
+    // First backspace the existing text
+    if (currentLength > 0) {
+        currentBackspaceInterval = setInterval(() => {
+            if (currentLength > 0) {
+                currentLength--;
+                searchInput.value = currentText.substring(0, currentLength) + '|';
+            } else {
+                clearInterval(currentBackspaceInterval);
+                currentBackspaceInterval = null;
+                
+                // Start typing the new text after a small delay
+                setTimeout(() => startTypingNewText(query, searchInput), 100);
+            }
+        }, 20); // Same speed as typing
+    } else {
+        // If no existing text, start typing immediately
+        startTypingNewText(query, searchInput);
+    }
+}
+
+// Helper function to type new text
+function startTypingNewText(query, searchInput) {
     let i = 0;
     currentTypeInterval = setInterval(() => {
         if (i < query.length) {
@@ -99,7 +136,7 @@ function fillSearch(query) {
             searchInput.value = query; // Remove cursor
             isTypingInProgress = false;
         }
-    }, 20);
+    }, 20); // Same speed as backspace
 }
 
 // Function to cycle through suggestions
