@@ -234,6 +234,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const sendButton = document.querySelector('.send-btn');
     const micButton = document.querySelector('.mic-btn');
     const orgMemoryToggle = document.querySelector('.toggle-switch input');
+    const categoryNav = document.querySelector('.category-nav');
+    const categoryButtons = document.querySelectorAll('.category-btn');
 
     // Search functionality
     function handleSearch(query) {
@@ -299,5 +301,76 @@ document.addEventListener('DOMContentLoaded', function() {
 
     searchInput.addEventListener('blur', () => {
         searchInput.style.transform = '';
+    });
+    
+    // Mobile enhancements
+    
+    // Improve scrolling for category nav on mobile
+    let isScrolling = false;
+    
+    // Helper function to check if device is mobile
+    function isMobile() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+    }
+    
+    // Smooth scroll to centered active category button
+    function scrollActiveCategoryIntoView() {
+        if (!categoryNav) return;
+        
+        const activeBtn = categoryNav.querySelector('.active');
+        if (!activeBtn) return;
+        
+        // Don't scroll on desktop
+        if (!isMobile()) return;
+        
+        // Calculate the scroll position to center the active button
+        const navWidth = categoryNav.offsetWidth;
+        const btnLeft = activeBtn.offsetLeft;
+        const btnWidth = activeBtn.offsetWidth;
+        const scrollPos = btnLeft - (navWidth / 2) + (btnWidth / 2);
+        
+        // Scroll smoothly to position
+        categoryNav.scrollTo({
+            left: scrollPos,
+            behavior: 'smooth'
+        });
+    }
+    
+    // Call on page load
+    setTimeout(scrollActiveCategoryIntoView, 300);
+    
+    // Prevent accidental page zoom when tapping quickly on mobile
+    document.addEventListener('touchend', (e) => {
+        if (e.target.tagName === 'BUTTON' || e.target.tagName === 'INPUT') {
+            const now = Date.now();
+            const timeSince = now - (e.target._lastTouch || 0);
+            
+            if (timeSince < 300) {
+                e.preventDefault();
+            }
+            
+            e.target._lastTouch = now;
+        }
+    }, false);
+    
+    // Add overscroll capability to category nav
+    if (categoryNav && isMobile()) {
+        categoryNav.style.WebkitOverflowScrolling = 'touch';
+    }
+    
+    // Improve task card touch response
+    const taskCards = document.querySelectorAll('.task-card');
+    taskCards.forEach(card => {
+        card.addEventListener('touchstart', () => {
+            card.classList.add('touch-active');
+        });
+        
+        card.addEventListener('touchend', () => {
+            card.classList.remove('touch-active');
+        });
+        
+        card.addEventListener('touchcancel', () => {
+            card.classList.remove('touch-active');
+        });
     });
 }); 

@@ -16,6 +16,7 @@
     box-sizing: border-box;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     font-weight: 400;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -27,6 +28,9 @@ body {
     justify-content: center;
     align-items: flex-start;
     padding: 10px 20px 0;
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
 }
 
 .app-container {
@@ -392,6 +396,17 @@ body {
     font-size: 0.875rem;
 }
 
+/* Touch active state for task cards */
+.task-card.touch-active {
+    transform: scale(0.98);
+    box-shadow: 0 0 8px rgba(45, 212, 163, 0.3);
+    background: linear-gradient(to right, #f2f1f4, #f7f6f9);
+}
+
+.task-card.touch-active::before {
+    opacity: 1;
+}
+
 @media (max-width: 768px) {
     .hero-title {
         font-size: 32px;
@@ -408,10 +423,10 @@ body {
     .category-nav {
         margin-top: 20px;
         gap: 6px;
-        overflow-x: auto;
-        justify-content: flex-start;
+        overflow-x: visible;
+        justify-content: center;
         padding: 4px 20px;
-        flex-wrap: nowrap;
+        flex-wrap: wrap;
         max-width: calc(100% - 40px);
         margin-left: auto;
         margin-right: auto;
@@ -421,6 +436,7 @@ body {
         padding: 5px 8px;
         font-size: 12px;
         white-space: nowrap;
+        margin-bottom: 4px;
     }
     
     .left-controls {
@@ -453,6 +469,10 @@ body {
     
     .task-card h3 {
         font-size: 0.875rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: calc(100% - 20px);
     }
     
     .task-card h3[data-length="long"] {
@@ -462,7 +482,7 @@ body {
 
 @media (max-width: 480px) {
     .app-container {
-        padding: 0 10px;
+        padding: 0 5px;
     }
     
     .search-box {
@@ -478,7 +498,7 @@ body {
     
     .task-list {
         gap: 0.5rem;
-        padding: 0 0.75rem;
+        padding: 0 0.5rem;
     }
     
     .task-card {
@@ -487,11 +507,11 @@ body {
     }
     
     .task-card h3 {
-        font-size: 0.875rem;
+        font-size: 13px;
     }
     
     .task-card h3[data-length="long"] {
-        font-size: 0.875rem;
+        font-size: 13px;
     }
     
     .integration-icons {
@@ -510,10 +530,11 @@ body {
     .suggested-tasks h2 {
         font-size: 14px;
         margin-bottom: 6px;
+        padding-left: 0.5rem;
     }
     
     .left-controls {
-        min-width: 170px;
+        min-width: 150px;
         flex-shrink: 0;
     }
     
@@ -529,29 +550,49 @@ body {
     .task-card h3::before {
         width: 14px;
         height: 14px;
+        margin-right: 8px;
     }
     
     .category-nav {
-        padding: 4px 12px;
-        max-width: calc(100% - 24px);
+        padding: 4px 10px;
+        max-width: calc(100% - 20px);
+        gap: 4px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .category-btn {
+        padding: 4px 6px;
+        font-size: 11px;
+        margin-bottom: 4px;
+    }
+    
+    .suggested-tasks {
+        padding: 0 1rem;
+        margin-top: 1.5rem;
     }
 }
 
 @media (max-width: 360px) {
     .search-controls {
-        flex-wrap: wrap;
+        flex-direction: row;
+        flex-wrap: nowrap;
         gap: 8px;
     }
     
     .left-controls {
-        width: 100%;
-        justify-content: space-between;
+        width: auto;
         min-width: unset;
+        flex-shrink: 0;
+        justify-content: flex-start;
+        flex-wrap: nowrap;
     }
     
     .action-buttons {
         margin-left: auto;
-        margin-top: 4px;
+        width: auto;
+        justify-content: flex-end;
+        flex-shrink: 0;
     }
     
     .search-input {
@@ -563,11 +604,144 @@ body {
     }
     
     .task-list {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 0.5rem;
+        gap: 0.4rem;
     }
     
     .task-card {
         padding: 0.75rem;
+        height: 38px;
+    }
+    
+    .toggle-switch {
+        width: 36px;
+        height: 20px;
+    }
+    
+    .toggle-slider:before {
+        width: 14px;
+        height: 14px;
+        top: 3px;
+        left: 3px;
+    }
+    
+    .toggle-switch input:checked + .toggle-slider:before {
+        transform: translateX(16px);
+    }
+    
+    .toggle-label {
+        font-size: 12px;
+    }
+    
+    .integration-count {
+        font-size: 12px;
+    }
+    
+    .category-nav {
+        padding: 2px 8px;
+        max-width: calc(100% - 16px);
+    }
+    
+    .mic-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .send-btn {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+/* New ultra-small screen size */
+@media (max-width: 320px) {
+    .search-box {
+        padding: 8px;
+    }
+    
+    .search-input {
+        font-size: 12px;
+        padding: 8px 0;
+        margin-bottom: 10px;
+    }
+    
+    .category-btn {
+        padding: 3px 5px;
+        font-size: 10px;
+    }
+    
+    .task-card h3 {
+        font-size: 12px;
+    }
+    
+    .task-card h3::before {
+        width: 12px;
+        height: 12px;
+        margin-right: 6px;
+    }
+    
+    .suggested-tasks h2 {
+        font-size: 13px;
+    }
+    
+    .toggle-container, .integration-icons {
+        min-width: auto;
+    }
+    
+    .left-controls {
+        gap: 6px;
+    }
+    
+    .app-container {
+        padding: 0 3px;
+    }
+}
+
+/* Touch-specific styles for mobile devices */
+@media (hover: none) and (pointer: coarse) {
+    .task-card {
+        -webkit-touch-callout: none;
+        touch-action: manipulation;
+    }
+    
+    .task-card:active {
+        transform: scale(0.98);
+        box-shadow: 0 0 8px rgba(45, 212, 163, 0.3);
+        background: linear-gradient(to right, #f2f1f4, #f7f6f9);
+    }
+    
+    .task-card:active::before {
+        opacity: 1;
+    }
+    
+    .category-btn {
+        touch-action: manipulation;
+    }
+    
+    .category-btn:active {
+        background: rgba(0, 0, 0, 0.05);
+    }
+    
+    .category-btn.active:active {
+        background: #333;
+    }
+    
+    .send-btn:active {
+        transform: scale(0.95);
+    }
+    
+    .mic-btn:active {
+        opacity: 0.7;
+    }
+    
+    /* Make the horizontal scroll of categories smoother */
+    .category-nav {
+        scroll-snap-type: none;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .category-btn {
+        scroll-snap-align: none;
+        margin-bottom: 6px;
     }
 } 
