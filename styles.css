@@ -332,14 +332,34 @@ body {
     border-radius: var(--border-radius);
     padding: 1rem;
     cursor: pointer;
-    transition: var(--transition);
+    transition: all 0.3s ease;
     height: 48px;
     display: flex;
     align-items: center;
+    position: relative;
+    overflow: hidden;
 }
 
 .task-card:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 0 10px rgba(45, 212, 163, 0.3);
+    background: linear-gradient(to right, #f2f1f4, #f7f6f9);
+    transform: translateY(-2px);
+}
+
+.task-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(45, 212, 163, 0.08), rgba(45, 212, 163, 0.06));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.task-card:hover::before {
+    opacity: 1;
 }
 
 .task-card h3 {
