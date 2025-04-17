@@ -267,18 +267,18 @@ body {
 
 .category-nav {
     display: flex;
-    gap: 2px;
+    gap: 4px;
     margin: 0 auto 12px;
     justify-content: center;
-    overflow-x: auto;
+    overflow-x: visible;
     padding: 3px 0;
     -ms-overflow-style: none;
     scrollbar-width: none;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     width: 100%;
     max-width: 600px;
     -webkit-overflow-scrolling: touch;
-    padding: 0 5px;
+    padding: 0 10px;
 }
 
 .category-nav::-webkit-scrollbar {
@@ -288,9 +288,9 @@ body {
 .category-btn {
     background: white;
     border: 1px solid #e0e0e0;
-    padding: 3px 5px;
+    padding: 4px 6px;
     border-radius: 4px;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 500;
     color: #666;
     cursor: pointer;
@@ -298,7 +298,8 @@ body {
     white-space: nowrap;
     text-align: center;
     min-width: fit-content;
-    flex: 0 0 auto;
+    flex: 0 1 auto;
+    margin: 2px;
 }
 
 .category-btn:hover {
@@ -426,20 +427,22 @@ body {
     
     .category-nav {
         margin-top: 15px;
-        gap: 2px;
-        overflow-x: auto;
-        justify-content: flex-start;
-        padding: 3px 5px;
-        flex-wrap: nowrap;
-        max-width: 100%;
+        gap: 4px;
+        overflow-x: visible;
+        justify-content: center;
+        padding: 4px 10px;
+        flex-wrap: wrap;
+        max-width: calc(100% - 20px);
+        margin-left: auto;
+        margin-right: auto;
     }
     
     .category-btn {
-        padding: 3px 5px;
-        font-size: 10px;
+        padding: 4px 6px;
+        font-size: 11px;
         white-space: nowrap;
+        margin: 2px;
         flex-grow: 0;
-        flex-shrink: 0;
     }
     
     .left-controls {
