@@ -16,18 +16,79 @@
                     
                     <div class="search-controls">
                         <div class="left-controls">
-                            <div class="integration-icons">
+                            <div class="integration-icons" id="integrations-btn">
                                 <img src="images/github.png" alt="GitHub" class="integration-icon github-icon">
                                 <img src="images/download.png" alt="Slack" class="integration-icon">
                                 <span class="integration-count">20+</span>
+                                
+                                <!-- Integrations Popup -->
+                                <div id="integrations-popup" class="om1-popup integrations-popup">
+                                    <div class="om1-popup-content">
+                                        <div class="om1-popup-header">
+                                            <h3>Available Connectors</h3>
+                                            <button id="close-integrations-popup" class="close-popup" aria-label="Close">
+                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M1 1L13 13M1 13L13 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="om1-popup-body integrations-popup-body">
+                                            <p>Village connects to these tools to provide comprehensive knowledge across your organization:</p>
+                                            <div class="integrations-grid">
+                                                <div class="integration-item">
+                                                    <img src="images/GitHub-logo.png" alt="GitHub" class="integration-logo">
+                                                </div>
+                                                <div class="integration-item">
+                                                    <img src="images/Jira_Logo.svg.png" alt="Jira" class="integration-logo">
+                                                </div>
+                                                <div class="integration-item">
+                                                    <img src="images/Slack-logo.png" alt="Slack" class="integration-logo">
+                                                </div>
+                                                <div class="integration-item">
+                                                    <img src="images/notion.png" alt="Notion" class="integration-logo">
+                                                </div>
+                                                <div class="integration-item">
+                                                    <img src="images/Linear.png" alt="Linear" class="integration-logo">
+                                                </div>
+                                                <div class="integration-item">
+                                                    <img src="images/gitlab.png" alt="GitLab" class="integration-logo">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             
                             <div class="toggle-container">
                                 <label class="toggle-switch">
-                                    <input type="checkbox" checked>
+                                    <input type="checkbox" id="om1-toggle" checked>
                                     <span class="toggle-slider"></span>
                                 </label>
                                 <span class="toggle-label">OM1</span>
+                                
+                                <!-- OM1 Popup -->
+                                <div id="om1-popup" class="om1-popup">
+                                    <div class="om1-popup-content">
+                                        <div class="om1-popup-header">
+                                            <h3>Organizational Memory (OM1)</h3>
+                                            <button id="close-popup" class="close-popup" aria-label="Close">
+                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M1 1L13 13M1 13L13 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="om1-popup-body">
+                                            <p>Village's OM1 organizes knowledge across your company's tools and systems. Benefits:</p>
+                                            <ul>
+                                                <li>Access historical context and decisions</li>
+                                                <li>Retain knowledge as team members change</li>
+                                                <li>Get organization-specific answers</li>
+                                                <li>Cross-reference across tools</li>
+                                            </ul>
+                                            <p>With OM1 enabled, you get more accurate, context-aware responses.</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
@@ -77,6 +138,7 @@
             </section>
         </div>
     </div>
+    
     <script src="script.js"></script>
 </body>
 </html> 

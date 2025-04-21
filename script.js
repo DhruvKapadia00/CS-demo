@@ -236,6 +236,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const orgMemoryToggle = document.querySelector('.toggle-switch input');
     const categoryNav = document.querySelector('.category-nav');
     const categoryButtons = document.querySelectorAll('.category-btn');
+    
+    // OM1 Popup Elements
+    const om1Toggle = document.getElementById('om1-toggle');
+    const om1Popup = document.getElementById('om1-popup');
+    const closePopupBtn = document.getElementById('close-popup');
+    
+    // Integrations Popup Elements
+    const integrationsBtn = document.getElementById('integrations-btn');
+    const integrationsPopup = document.getElementById('integrations-popup');
+    const closeIntegrationsBtn = document.getElementById('close-integrations-popup');
 
     // Search functionality
     function handleSearch(query) {
@@ -292,6 +302,54 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             toggleLabel.style.opacity = '';
         }, 200);
+        
+        // Show OM1 popup when toggled
+        om1Popup.classList.add('active');
+    });
+    
+    // OM1 Popup Close Button
+    closePopupBtn.addEventListener('click', () => {
+        om1Popup.classList.remove('active');
+    });
+    
+    // Integrations Button
+    integrationsBtn.addEventListener('click', () => {
+        // Close OM1 popup if open
+        om1Popup.classList.remove('active');
+        
+        // Toggle integrations popup
+        integrationsPopup.classList.add('active');
+    });
+    
+    // Close Integrations Popup Button
+    closeIntegrationsBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        integrationsPopup.classList.remove('active');
+    });
+    
+    // Close popup when clicking outside
+    document.addEventListener('click', (e) => {
+        // For OM1 popup
+        if (om1Popup.classList.contains('active') && 
+            !om1Popup.contains(e.target) && 
+            !orgMemoryToggle.contains(e.target)) {
+            om1Popup.classList.remove('active');
+        }
+        
+        // For integrations popup
+        if (integrationsPopup.classList.contains('active') && 
+            !integrationsPopup.contains(e.target) && 
+            !integrationsBtn.contains(e.target)) {
+            integrationsPopup.classList.remove('active');
+        }
+    });
+    
+    // Close popups with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            om1Popup.classList.remove('active');
+            integrationsPopup.classList.remove('active');
+        }
     });
 
     // Add input animations

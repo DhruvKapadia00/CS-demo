@@ -128,6 +128,8 @@ body {
     gap: 8px;
     flex-shrink: 0;
     min-width: 65px;
+    position: relative;
+    cursor: pointer;
 }
 
 .integration-icon {
@@ -161,6 +163,8 @@ body {
     gap: 6px;
     flex-shrink: 0;
     min-width: 65px;
+    position: relative;
+    justify-content: center;
 }
 
 .toggle-switch {
@@ -213,6 +217,7 @@ body {
     font-weight: 500;
     display: flex;
     align-items: center;
+    text-align: center;
 }
 
 .action-buttons {
@@ -598,6 +603,50 @@ body {
         padding: 0 1rem;
         margin-top: 1.5rem;
     }
+    
+    .om1-popup {
+        width: 260px;
+        left: 50%;
+    }
+    
+    .om1-popup:after {
+        left: 50%;
+        margin-left: -6px;
+    }
+    
+    .om1-popup-header h3 {
+        font-size: 13px;
+    }
+    
+    .om1-popup-body {
+        padding: 6px 8px 8px;
+    }
+    
+    .om1-popup-body p,
+    .om1-popup-body li {
+        font-size: 11px;
+    }
+    
+    .om1-popup-header {
+        padding: 6px 8px;
+    }
+    
+    .integrations-popup {
+        width: 280px;
+        left: 50%;
+    }
+    
+    .integrations-popup:after {
+        margin-left: -70px;
+    }
+    
+    .integration-item {
+        height: 50px;
+    }
+    
+    .integration-logo {
+        max-height: 30px;
+    }
 }
 
 @media (max-width: 360px) {
@@ -676,6 +725,37 @@ body {
     .send-btn {
         width: 32px;
         height: 32px;
+    }
+    
+    .om1-popup {
+        width: 240px;
+        left: 50%;
+    }
+    
+    .om1-popup-header {
+        padding: 8px 10px;
+    }
+    
+    .om1-popup-body {
+        padding: 8px;
+    }
+    
+    .integrations-popup {
+        width: 240px;
+        left: 50%;
+    }
+    
+    .integrations-popup:after {
+        margin-left: -60px;
+    }
+    
+    .integrations-grid {
+        gap: 8px;
+    }
+    
+    .integration-item {
+        padding: 6px;
+        height: 45px;
     }
 }
 
@@ -771,4 +851,159 @@ body {
         scroll-snap-align: none;
         margin-bottom: 6px;
     }
+}
+
+/* OM1 Popup Styles */
+.om1-popup {
+    position: absolute;
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-5px);
+    width: 260px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+    border: 1px solid #eaeaea;
+    pointer-events: none;
+}
+
+.om1-popup.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+}
+
+.om1-popup:after {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    margin-left: -6px;
+    width: 12px;
+    height: 12px;
+    background: white;
+    transform: rotate(45deg);
+    border-left: 1px solid #eaeaea;
+    border-top: 1px solid #eaeaea;
+}
+
+.om1-popup-content {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.om1-popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.om1-popup-header h3 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0;
+}
+
+.close-popup {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #666;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.close-popup:hover {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.close-popup svg {
+    width: 10px;
+    height: 10px;
+}
+
+.om1-popup-body {
+    padding: 8px 10px 10px;
+    max-height: none;
+    overflow-y: visible;
+}
+
+.om1-popup-body p {
+    margin: 0 0 8px;
+    font-size: 11px;
+    line-height: 1.3;
+    color: #333;
+}
+
+.om1-popup-body p:last-child {
+    margin-bottom: 0;
+}
+
+.om1-popup-body ul {
+    padding-left: 14px;
+    margin: 4px 0 6px;
+}
+
+.om1-popup-body li {
+    margin-bottom: 3px;
+    font-size: 11px;
+    line-height: 1.3;
+    color: #333;
+}
+
+.om1-popup-body li:last-child {
+    margin-bottom: 0;
+}
+
+/* Integrations popup specific styles */
+.integrations-popup {
+    width: 320px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-5px);
+}
+
+.integrations-popup.active {
+    transform: translateX(-50%) translateY(0);
+}
+
+.integrations-popup:after {
+    left: 50%;
+    margin-left: -80px;
+}
+
+.integrations-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.integration-item {
+    background-color: #f8f8f8;
+    border-radius: 6px;
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+}
+
+.integration-logo {
+    max-width: 100%;
+    max-height: 40px;
+    object-fit: contain;
 } 
