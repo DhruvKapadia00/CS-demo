@@ -274,7 +274,7 @@ body {
     display: flex;
     gap: 6px;
     margin: 0 auto 12px;
-    justify-content: flex-start;
+    justify-content: center;
     overflow-x: auto;
     padding: 3px 0;
     -ms-overflow-style: none;

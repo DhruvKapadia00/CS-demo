@@ -241,11 +241,33 @@ document.addEventListener('DOMContentLoaded', function() {
     const om1Toggle = document.getElementById('om1-toggle');
     const om1Popup = document.getElementById('om1-popup');
     const closePopupBtn = document.getElementById('close-popup');
+    const om1Label = document.querySelector('.toggle-label');
+    const toggleContainer = document.querySelector('.toggle-container');
     
     // Integrations Popup Elements
     const integrationsBtn = document.getElementById('integrations-btn');
     const integrationsPopup = document.getElementById('integrations-popup');
     const closeIntegrationsBtn = document.getElementById('close-integrations-popup');
+
+    // Make the label and container clickable
+    om1Label.style.cursor = 'pointer';
+    toggleContainer.style.cursor = 'pointer';
+
+    // Show popup when clicking the label
+    om1Label.addEventListener('click', (e) => {
+        e.stopPropagation();
+        om1Popup.classList.add('active');
+    });
+
+    // Show popup when toggling the switch
+    om1Toggle.addEventListener('change', () => {
+        om1Popup.classList.add('active');
+    });
+
+    // OM1 Popup Close Button
+    closePopupBtn.addEventListener('click', () => {
+        om1Popup.classList.remove('active');
+    });
 
     // Search functionality
     function handleSearch(query) {
@@ -291,27 +313,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 1000);
     });
 
-    // Organizational Memory toggle
-    orgMemoryToggle.addEventListener('change', (e) => {
-        const isEnabled = e.target.checked;
-        console.log('Organizational Memory:', isEnabled ? 'enabled' : 'disabled');
-        
-        // Add visual feedback
-        const toggleLabel = document.querySelector('.toggle-label');
-        toggleLabel.style.opacity = '0.7';
-        setTimeout(() => {
-            toggleLabel.style.opacity = '';
-        }, 200);
-        
-        // Show OM1 popup when toggled
-        om1Popup.classList.add('active');
-    });
-    
-    // OM1 Popup Close Button
-    closePopupBtn.addEventListener('click', () => {
-        om1Popup.classList.remove('active');
-    });
-    
     // Integrations Button
     integrationsBtn.addEventListener('click', () => {
         // Close OM1 popup if open
