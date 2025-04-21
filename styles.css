@@ -971,13 +971,19 @@ body {
 
 /* Integrations popup specific styles */
 .integrations-popup {
-    width: 320px;
-    left: 50%;
+    width: 280px;
+    left: 40%;
     transform: translateX(-50%) translateY(-5px);
+    position: fixed;
+    top: 50%;
+    margin-top: -120px;
+    z-index: 1000;
 }
 
 .integrations-popup.active {
     transform: translateX(-50%) translateY(0);
+    opacity: 1;
+    visibility: visible;
 }
 
 .integrations-popup:after {
@@ -988,22 +994,39 @@ body {
 .integrations-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    gap: 8px;
     margin-top: 10px;
 }
 
 .integration-item {
     background-color: #f8f8f8;
     border-radius: 6px;
-    padding: 8px;
+    padding: 6px;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 60px;
+    height: 50px;
 }
 
 .integration-logo {
     max-width: 100%;
-    max-height: 40px;
+    max-height: 35px;
     object-fit: contain;
-} 
+}
+
+/* Specific logo size adjustments */
+.integration-logo[alt="Slack"] {
+    max-height: 42px;
+}
+
+.integration-logo[alt="Notion"] {
+    max-height: 42px;
+}
+
+.integration-logo[alt="GitLab"] {
+    max-height: 42px;
+}
+
+.integration-logo[alt="Jira"] {
+    max-height: 28px;
+}
