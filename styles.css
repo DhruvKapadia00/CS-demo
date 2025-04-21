@@ -274,7 +274,7 @@ body {
     display: flex;
     gap: 6px;
     margin: 0 auto 12px;
-    justify-content: center;
+    justify-content: flex-start;
     overflow-x: auto;
     padding: 3px 0;
     -ms-overflow-style: none;
@@ -304,9 +304,9 @@ body {
 .category-btn {
     background: white;
     border: 1px solid #e0e0e0;
-    padding: 3px 5px;
+    padding: 3px 6px;
     border-radius: 4px;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 500;
     color: #666;
     cursor: pointer;
@@ -315,6 +315,7 @@ body {
     text-align: center;
     min-width: fit-content;
     flex: 0 0 auto;
+    margin-bottom: 0;
 }
 
 .category-btn:hover {
@@ -444,7 +445,7 @@ body {
         margin-top: 15px;
         gap: 5px;
         overflow-x: auto;
-        justify-content: center;
+        justify-content: flex-start;
         padding: 3px 5px;
         flex-wrap: nowrap;
         max-width: 100%;
@@ -464,7 +465,7 @@ body {
     
     .category-btn {
         padding: 3px 5px;
-        font-size: 10px;
+        font-size: 9px;
         white-space: nowrap;
         flex-grow: 0;
         flex-shrink: 0;

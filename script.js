@@ -26,9 +26,9 @@ const categorySuggestions = {
         { text: "Draft follow-up email", query: "Draft follow ups for today's calls" }
     ],
     "customer-success": [
-        { text: "Analyze Customer Conversations", query: "Review our last 20 customer support tickets for common pain points and suggested improvements" },
-        { text: "Track Customer Satisfaction", query: "Show me this week's customer satisfaction metrics and highlight areas needing immediate attention" },
-        { text: "Support Team Performance", query: "Generate a report on average response times and resolution rates for each support agent" }
+        { text: "Analyze Customer Conversations", query: "What are our most common support ticket issues this month?" },
+        { text: "Track Customer Satisfaction", query: "Highlight any concerning trends in CSAT scores" },
+        { text: "Support Team Performance", query: "Show resolution rates for each support agent" }
     ],
     "leadership": [
         { text: "Generate team updates", query: "Create a summary of what different teams got done this week" },
@@ -150,7 +150,7 @@ function cycleAutoSuggestions() {
         if (activeButton) {
             currentCategory = activeButton.textContent.toLowerCase().replace(/\s+/g, '-');
             // Fix mapped category name for HR / People
-            if (currentCategory === "hr-/-people") currentCategory = "hr-people";
+            if (currentCategory === "hr") currentCategory = "hr-people";
         }
         
         const suggestions = categorySuggestions[currentCategory] || categorySuggestions["engineering"];
@@ -171,7 +171,7 @@ function cycleAutoSuggestions() {
         if (activeButton) {
             currentCategory = activeButton.textContent.toLowerCase().replace(/\s+/g, '-');
             // Fix mapped category name for HR / People
-            if (currentCategory === "hr-/-people") currentCategory = "hr-people";
+            if (currentCategory === "hr") currentCategory = "hr-people";
         }
         
         // Update suggested tasks based on initial category
@@ -196,7 +196,7 @@ function cycleAutoSuggestions() {
             
             // Get new category
             const newCategory = this.textContent.toLowerCase().replace(/\s+/g, '-');
-            const mappedCategory = newCategory === "hr-/-people" ? "hr-people" : newCategory;
+            const mappedCategory = newCategory === "hr" ? "hr-people" : newCategory;
             
             // Update suggested tasks for the new category
             updateSuggestedTasks(mappedCategory);
