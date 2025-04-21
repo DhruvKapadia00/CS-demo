@@ -25,10 +25,10 @@ const categorySuggestions = {
         { text: "Research today's prospects", query: "Research how today's prospects could use our product" },
         { text: "Draft follow-up email", query: "Draft follow ups for today's calls" }
     ],
-    "support": [
-        { text: "Analyze support feedback", query: "Identify trends and recurring issues across our customers" },
-        { text: "Track customer health", query: "Identify at risk accounts based on engagement metrics and comms" },
-        { text: "Create context-aware documentation", query: "Can you generate FAQs based on recent customer calls" }
+    "customer-success": [
+        { text: "Analyze Customer Conversations", query: "Review our last 20 customer support tickets for common pain points and suggested improvements" },
+        { text: "Track Customer Satisfaction", query: "Show me this week's customer satisfaction metrics and highlight areas needing immediate attention" },
+        { text: "Support Team Performance", query: "Generate a report on average response times and resolution rates for each support agent" }
     ],
     "leadership": [
         { text: "Generate team updates", query: "Create a summary of what different teams got done this week" },
