@@ -12,87 +12,16 @@
         <div class="main-content">
             <div class="search-container">
                 <div class="search-box">
-                    <input type="text" class="search-input" placeholder="">
-                    
-                    <div class="search-controls">
-                        <div class="left-controls">
-                            <div class="integration-icons" id="integrations-btn">
-                                <img src="images/github.png" alt="GitHub" class="integration-icon github-icon">
-                                <img src="images/download.png" alt="Slack" class="integration-icon">
-                                <span class="integration-count">20+</span>
-                                
-                                <!-- Integrations Popup -->
-                                <div id="integrations-popup" class="om1-popup integrations-popup">
-                                    <div class="om1-popup-content">
-                                        <div class="om1-popup-header">
-                                            <h3>Available Connectors</h3>
-                                            <button id="close-integrations-popup" class="close-popup" aria-label="Close">
-                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1 1L13 13M1 13L13 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                                </svg>
-                                            </button>
-                                        </div>
-                                        <div class="om1-popup-body integrations-popup-body">
-                                            <p>Village connects to these tools to provide comprehensive knowledge across your organization:</p>
-                                            <div class="integrations-grid">
-                                                <div class="integration-item">
-                                                    <img src="images/GitHub-logo.png" alt="GitHub" class="integration-logo">
-                                                </div>
-                                                <div class="integration-item">
-                                                    <img src="images/Jira_Logo.svg.png" alt="Jira" class="integration-logo">
-                                                </div>
-                                                <div class="integration-item">
-                                                    <img src="images/Slack-logo.png" alt="Slack" class="integration-logo">
-                                                </div>
-                                                <div class="integration-item">
-                                                    <img src="images/notion.png" alt="Notion" class="integration-logo">
-                                                </div>
-                                                <div class="integration-item">
-                                                    <img src="images/Linear.png" alt="Linear" class="integration-logo">
-                                                </div>
-                                                <div class="integration-item">
-                                                    <img src="images/gitlab.png" alt="GitLab" class="integration-logo">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="toggle-container">
-                                <label class="toggle-switch">
-                                    <input type="checkbox" id="om1-toggle" checked>
-                                    <span class="toggle-slider"></span>
-                                </label>
-                                <span class="toggle-label">OM1</span>
-                                
-                                <!-- OM1 Popup -->
-                                <div id="om1-popup" class="om1-popup">
-                                    <div class="om1-popup-content">
-                                        <div class="om1-popup-header">
-                                            <h3>Organizational Memory (OM1)</h3>
-                                            <button id="close-popup" class="close-popup" aria-label="Close">
-                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1 1L13 13M1 13L13 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                                </svg>
-                                            </button>
-                                        </div>
-                                        <div class="om1-popup-body">
-                                            <p>Village's OM1 organizes knowledge across your company's tools and systems. Benefits:</p>
-                                            <ul>
-                                                <li>Access historical context and decisions</li>
-                                                <li>Retain knowledge as team members change</li>
-                                                <li>Get organization-specific answers</li>
-                                                <li>Cross-reference across tools</li>
-                                            </ul>
-                                            <p>With OM1 enabled, you get more accurate, context-aware responses.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="search-top-row">
+                        <input type="text" class="search-input" placeholder="Ask about Notion...">
                         
                         <div class="action-buttons">
+                            <button class="attach-btn" aria-label="Attach file">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                            
                             <button class="mic-btn" aria-label="Voice input">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -108,34 +37,238 @@
                             </button>
                         </div>
                     </div>
+                    
+                    <div class="search-bottom-row">
+                        <!-- Customer Selector -->
+                        <div class="customer-selector-wrapper">
+                            <button class="customer-selector-btn" id="customer-selector-btn">
+                                <span class="customer-count">All Customers</span>
+                                <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" class="dropdown-arrow">
+                                    <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                            
+                            <!-- Customer Dropdown Menu -->
+                            <div class="customer-dropdown" id="customer-dropdown">
+                                <div class="customer-dropdown-header">
+                                    <input type="text" class="customer-search" placeholder="Search customers...">
+                                </div>
+                                <div class="customer-dropdown-list">
+                                    <label class="customer-item all-customers">
+                                        <input type="checkbox" id="all-customers-checkbox" checked>
+                                        <span>All Customers</span>
+                                    </label>
+                                    <label class="customer-item">
+                                        <input type="checkbox" class="customer-checkbox" checked>
+                                        <img src="images/stripe-icon.png" alt="Stripe" class="customer-logo">
+                                        <span>Stripe</span>
+                                    </label>
+                                    <label class="customer-item">
+                                        <input type="checkbox" class="customer-checkbox" checked>
+                                        <img src="images/notion-icon.png" alt="Notion" class="customer-logo">
+                                        <span>Notion</span>
+                                    </label>
+                                    <label class="customer-item">
+                                        <input type="checkbox" class="customer-checkbox" checked>
+                                        <img src="images/anthropic-icon.png" alt="Anthropic" class="customer-logo">
+                                        <span>Anthropic</span>
+                                    </label>
+                                    <label class="customer-item">
+                                        <input type="checkbox" class="customer-checkbox" checked>
+                                        <img src="images/openai-icon.png" alt="OpenAI" class="customer-logo">
+                                        <span>OpenAI</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Connected Data Sources Dropdown -->
+                        <div class="connected-sources-wrapper">
+                            <button class="connected-sources-btn" id="connected-sources-btn">
+                                <div class="sources-icons">
+                                    <img src="images/google-icon.png" alt="Google" class="source-icon-img">
+                                    <img src="images/slack-icon.png" alt="Slack" class="source-icon-img">
+                                    <img src="images/zendesk-icon.png" alt="Zendesk" class="source-icon-img">
+                                    <img src="images/bigquery-icon.png" alt="BigQuery" class="source-icon-img">
+                                </div>
+                                <span class="sources-label">Connected data sources</span>
+                                <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" class="dropdown-arrow">
+                                    <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                            
+                            <!-- Dropdown Menu -->
+                            <div class="sources-dropdown" id="sources-dropdown">
+                                <div class="sources-dropdown-header">
+                                    <input type="text" class="sources-search" placeholder="Search data sources...">
+                                </div>
+                                <div class="sources-dropdown-list">
+                                    <label class="source-item">
+                                        <input type="checkbox" checked>
+                                        <img src="images/google-icon.png" alt="Google" class="source-icon-img">
+                                        <span>Google Workspace</span>
+                                    </label>
+                                    <label class="source-item">
+                                        <input type="checkbox" checked>
+                                        <img src="images/slack-icon.png" alt="Slack" class="source-icon-img">
+                                        <span>Slack</span>
+                                    </label>
+                                    <label class="source-item">
+                                        <input type="checkbox">
+                                        <img src="images/notion-icon.png" alt="Notion" class="source-icon-img">
+                                        <span>Notion</span>
+                                    </label>
+                                    <label class="source-item">
+                                        <input type="checkbox">
+                                        <img src="images/salesforce-icon.svg" alt="Salesforce" class="source-icon-img">
+                                        <span>Salesforce</span>
+                                    </label>
+                                    <label class="source-item">
+                                        <input type="checkbox" checked>
+                                        <img src="images/zendesk-icon.png" alt="Zendesk" class="source-icon-img">
+                                        <span>Zendesk</span>
+                                    </label>
+                                    <label class="source-item">
+                                        <input type="checkbox">
+                                        <img src="images/gmail-icon.png" alt="Gmail" class="source-icon-img">
+                                        <span>Gmail</span>
+                                    </label>
+                                    <label class="source-item">
+                                        <input type="checkbox">
+                                        <img src="images/jira-icon.svg" alt="Jira" class="source-icon-img">
+                                        <span>Jira</span>
+                                    </label>
+                                    <label class="source-item">
+                                        <input type="checkbox">
+                                        <img src="images/gong-icon.png" alt="Gong" class="source-icon-img">
+                                        <span>Gong</span>
+                                    </label>
+                                    <label class="source-item">
+                                        <input type="checkbox" checked>
+                                        <img src="images/bigquery-icon.png" alt="BigQuery" class="source-icon-img">
+                                        <span>BigQuery</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="category-nav">
-                <button class="category-btn">Operations</button>
-                <button class="category-btn">Product</button>
-                <button class="category-btn">Engineering</button>
-                <button class="category-btn">Marketing</button>
-                <button class="category-btn">Sales</button>
-                <button class="category-btn active">Customer Success</button>
-                <button class="category-btn">Leadership</button>
-                <button class="category-btn">HR</button>
-            </div>
-
-            <section class="suggested-tasks">
-                <h2>Suggested Tasks</h2>
-                <div class="task-list">
-                    <div class="task-card">
-                        <h3>Analyze Customer Conversations</h3>
-                    </div>
-                    <div class="task-card">
-                        <h3>Track Customer Satisfaction</h3>
-                    </div>
-                    <div class="task-card">
-                        <h3>Support Team Performance</h3>
+            <section class="meetings-section">
+                <div class="meetings-header">
+                    <h2>Meetings Today</h2>
+                </div>
+                <div class="meetings-list">
+                    <div class="meeting-card">
+                        <div class="meeting-header">
+                            <div class="meeting-company">
+                                <div class="company-icon anthropic-icon">A</div>
+                                <span class="company-name">Anthropic</span>
+                            </div>
+                            <div class="meeting-time">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <span>10:30 AM</span>
+                            </div>
+                        </div>
+                        <h3 class="meeting-title">Q4 Strategy Review - Anthropic</h3>
+                        <div class="meeting-details">
+                            <div class="meeting-duration">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <polyline points="9 22 9 12 15 12 15 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span>30 min</span>
+                            </div>
+                            <div class="meeting-attendees">
+                                <span class="attendee-avatar">🧑</span>
+                                <span class="attendee-avatar">👨</span>
+                                <span class="attendee-avatar">🏠</span>
+                            </div>
+                        </div>
+                        <div class="meeting-actions">
+                            <button class="prepare-btn">Prepare</button>
+                        </div>
                     </div>
                 </div>
             </section>
+        </div>
+    </div>
+    
+    <!-- Meeting Prep Popup -->
+    <div class="meeting-prep-overlay" id="meeting-prep-overlay">
+        <div class="meeting-prep-modal">
+            <button class="close-prep-modal" id="close-prep-modal" aria-label="Close">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+            
+            <div class="meeting-info-banner">
+                <div class="meeting-info-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="meeting-info-content">
+                    <div class="meeting-info-header">
+                        <span class="meeting-info-time">10:30 AM</span>
+                        <span class="meeting-info-badge">Upcoming</span>
+                    </div>
+                    <p class="meeting-info-description">Quarterly business review to discuss performance metrics, upcoming initiatives, and strategic alignment for Q4 2025.</p>
+                </div>
+            </div>
+            
+            <div class="prep-section">
+                <div class="prep-section-header">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <polyline points="14 2 14 8 20 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <h3>Meeting Prep</h3>
+                    <button class="collapse-btn">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="prep-content">
+                    <h4>Talking Points</h4>
+                    <ul class="talking-points">
+                        <li>Review Q4 performance metrics and achievement of 94% uptime SLA target</li>
+                        <li>Discuss upcoming Salesforce integration timeline and beta access opportunities</li>
+                        <li>Address expansion opportunity: 50 additional seats for operations team</li>
+                        <li>Present Q1 2026 renewal proposal with enterprise tier pricing</li>
+                    </ul>
+                    
+                    <h4>Key Objectives</h4>
+                    <ul class="key-objectives">
+                        <li>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.5 4L6 11.5L2.5 8" stroke="#10A37F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Secure commitment for advanced features training session
+                        </li>
+                        <li>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.5 4L6 11.5L2.5 8" stroke="#10A37F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Identify any blockers or concerns before renewal period
+                        </li>
+                        <li>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.5 4L6 11.5L2.5 8" stroke="#10A37F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Confirm interest in enterprise tier and additional seats
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
     

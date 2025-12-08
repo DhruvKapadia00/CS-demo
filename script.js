@@ -28,7 +28,15 @@ const categorySuggestions = {
     "customer-success": [
         { text: "Analyze Customer Conversations", query: "What are our most common support ticket issues this month?" },
         { text: "Track Customer Satisfaction", query: "Highlight any concerning trends in CSAT scores" },
-        { text: "Support Team Performance", query: "Show resolution rates for each support agent" }
+        { text: "Support Team Performance", query: "Show resolution rates for each support agent" },
+        { text: "Churn Risk Analysis", query: "Which customers are at churn risk and why? Show me sentiment shifts in recent interactions." },
+        { text: "Customer Health Scorecard", query: "Give me a complete customer health scorecard for - recent activity, open issues, sentiment, and next steps." },
+        { text: "Feature Requests", query: "What are the top 10 feature requests we're hearing from customers and which customers want them?" },
+        { text: "Customer Escalations", query: "Show me all customer escalations in the last 30 days - what are the patterns?" },
+        { text: "QBR Preparation", query: "Prepare me for my customer QBR with . What happened since last QBR?" },
+        { text: "Feature Adoption", query: "Which customers are adopting new features slowest and what's blocking them?" },
+        { text: "At-Risk Battle Card", query: "Create a battle card for our top 5 at-risk accounts - why they might leave and how to save them." },
+        { text: "NPS Detractors", query: "Show me our NPS detractors - what specifically are they unhappy about and what's our action plan?" }
     ],
     "leadership": [
         { text: "Generate team updates", query: "Create a summary of what different teams got done this week" },
@@ -139,21 +147,13 @@ function startTypingNewText(query, searchInput) {
     }, 12); // Smooth typing speed
 }
 
-// Function to cycle through suggestions
+// Function to cycle through Customer Success suggestions only
 function cycleAutoSuggestions() {
-    let currentCategory = 'engineering';
+    const currentCategory = 'customer-success';
     let currentIndex = 0;
     
     function checkAndCycle() {
-        // Get current category from active button
-        const activeButton = document.querySelector('.category-btn.active');
-        if (activeButton) {
-            currentCategory = activeButton.textContent.toLowerCase().replace(/\s+/g, '-');
-            // Fix mapped category name for HR / People
-            if (currentCategory === "hr") currentCategory = "hr-people";
-        }
-        
-        const suggestions = categorySuggestions[currentCategory] || categorySuggestions["engineering"];
+        const suggestions = categorySuggestions[currentCategory];
         
         if (!isTypingInProgress) {
             isTypingInProgress = true;
@@ -167,17 +167,7 @@ function cycleAutoSuggestions() {
     
     // Start first cycle soon after page load
     setTimeout(() => {
-        const activeButton = document.querySelector('.category-btn.active');
-        if (activeButton) {
-            currentCategory = activeButton.textContent.toLowerCase().replace(/\s+/g, '-');
-            // Fix mapped category name for HR / People
-            if (currentCategory === "hr") currentCategory = "hr-people";
-        }
-        
-        // Update suggested tasks based on initial category
-        updateSuggestedTasks(currentCategory);
-        
-        const suggestions = categorySuggestions[currentCategory] || categorySuggestions["engineering"];
+        const suggestions = categorySuggestions[currentCategory];
         
         if (!isTypingInProgress) {
             isTypingInProgress = true;
@@ -186,42 +176,6 @@ function cycleAutoSuggestions() {
             cycleTimeout = setTimeout(checkAndCycle, 3000);
         }
     }, 800);
-    
-    // Update category when buttons are clicked
-    document.querySelectorAll('.category-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            // Update active state
-            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            
-            // Get new category
-            const newCategory = this.textContent.toLowerCase().replace(/\s+/g, '-');
-            const mappedCategory = newCategory === "hr" ? "hr-people" : newCategory;
-            
-            // Update suggested tasks for the new category
-            updateSuggestedTasks(mappedCategory);
-            
-            if (mappedCategory !== currentCategory) {
-                currentCategory = mappedCategory;
-                currentIndex = 0;
-                
-                // Clear existing timeout
-                if (cycleTimeout) {
-                    clearTimeout(cycleTimeout);
-                }
-                
-                // Start new cycle with first suggestion
-                const suggestions = categorySuggestions[currentCategory] || categorySuggestions["engineering"];
-                
-                if (!isTypingInProgress) {
-                    isTypingInProgress = true;
-                    fillSearch(suggestions[0].query);
-                    currentIndex = 1;
-                    cycleTimeout = setTimeout(checkAndCycle, 3000);
-                }
-            }
-        });
-    });
 }
 
 // Initialize when document is loaded
@@ -233,41 +187,211 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.querySelector('.search-input');
     const sendButton = document.querySelector('.send-btn');
     const micButton = document.querySelector('.mic-btn');
-    const orgMemoryToggle = document.querySelector('.toggle-switch input');
-    const categoryNav = document.querySelector('.category-nav');
-    const categoryButtons = document.querySelectorAll('.category-btn');
     
-    // OM1 Popup Elements
-    const om1Toggle = document.getElementById('om1-toggle');
-    const om1Popup = document.getElementById('om1-popup');
-    const closePopupBtn = document.getElementById('close-popup');
-    const om1Label = document.querySelector('.toggle-label');
-    const toggleContainer = document.querySelector('.toggle-container');
+    // Meeting Prep Popup Elements
+    const prepareBtn = document.querySelector('.prepare-btn');
+    const prepOverlay = document.getElementById('meeting-prep-overlay');
+    const closePrepBtn = document.getElementById('close-prep-modal');
+    
+    // Customer Selector Dropdown
+    const customerBtn = document.getElementById('customer-selector-btn');
+    const customerDropdown = document.getElementById('customer-dropdown');
+    const customerSearch = document.querySelector('.customer-search');
+    const allCustomersCheckbox = document.getElementById('all-customers-checkbox');
+    const customerCheckboxes = document.querySelectorAll('.customer-checkbox');
+    
+    // Connected Data Sources Dropdown
+    const sourcesBtn = document.getElementById('connected-sources-btn');
+    const sourcesDropdown = document.getElementById('sources-dropdown');
+    const sourcesSearch = document.querySelector('.sources-search');
     
     // Integrations Popup Elements
     const integrationsBtn = document.getElementById('integrations-btn');
     const integrationsPopup = document.getElementById('integrations-popup');
     const closeIntegrationsBtn = document.getElementById('close-integrations-popup');
 
-    // Make the label and container clickable
-    om1Label.style.cursor = 'pointer';
-    toggleContainer.style.cursor = 'pointer';
-
-    // Show popup when clicking the label
-    om1Label.addEventListener('click', (e) => {
-        e.stopPropagation();
-        om1Popup.classList.add('active');
-    });
-
-    // Show popup when toggling the switch
-    om1Toggle.addEventListener('change', () => {
-        om1Popup.classList.add('active');
-    });
-
-    // OM1 Popup Close Button
-    closePopupBtn.addEventListener('click', () => {
-        om1Popup.classList.remove('active');
-    });
+    // Toggle customer dropdown
+    if (customerBtn && customerDropdown) {
+        customerBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            customerDropdown.classList.toggle('active');
+            // Close sources dropdown if open
+            if (sourcesDropdown) sourcesDropdown.classList.remove('active');
+        });
+        
+        // Prevent dropdown from closing when clicking inside
+        customerDropdown.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+        
+        // Search functionality
+        if (customerSearch) {
+            customerSearch.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const customerItems = document.querySelectorAll('.customer-item:not(.all-customers)');
+                
+                customerItems.forEach(item => {
+                    const text = item.querySelector('span').textContent.toLowerCase();
+                    if (text.includes(searchTerm)) {
+                        item.style.display = 'flex';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        }
+        
+        // Handle "All Customers" checkbox
+        if (allCustomersCheckbox) {
+            allCustomersCheckbox.addEventListener('change', (e) => {
+                const isChecked = e.target.checked;
+                customerCheckboxes.forEach(checkbox => {
+                    checkbox.checked = isChecked;
+                });
+                updateCustomerCount();
+            });
+        }
+        
+        // Handle individual customer checkboxes
+        customerCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                updateCustomerCount();
+                // Update "All Customers" checkbox state
+                const allChecked = Array.from(customerCheckboxes).every(cb => cb.checked);
+                if (allCustomersCheckbox) {
+                    allCustomersCheckbox.checked = allChecked;
+                }
+            });
+        });
+        
+        // Function to update customer count
+        function updateCustomerCount() {
+            const checkedBoxes = Array.from(customerCheckboxes).filter(cb => cb.checked);
+            const checkedCount = checkedBoxes.length;
+            const totalCount = customerCheckboxes.length;
+            const customerBtn = document.getElementById('customer-selector-btn');
+            
+            if (customerBtn) {
+                // Clear existing content
+                customerBtn.innerHTML = '';
+                
+                if (checkedCount === totalCount) {
+                    // Show "All Customers" when all are selected
+                    const countSpan = document.createElement('span');
+                    countSpan.className = 'customer-count';
+                    countSpan.textContent = 'All Customers';
+                    
+                    const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                    arrow.setAttribute('width', '10');
+                    arrow.setAttribute('height', '6');
+                    arrow.setAttribute('viewBox', '0 0 10 6');
+                    arrow.setAttribute('fill', 'none');
+                    arrow.classList.add('dropdown-arrow');
+                    
+                    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                    path.setAttribute('d', 'M1 1L5 5L9 1');
+                    path.setAttribute('stroke', 'currentColor');
+                    path.setAttribute('stroke-width', '1.5');
+                    path.setAttribute('stroke-linecap', 'round');
+                    path.setAttribute('stroke-linejoin', 'round');
+                    arrow.appendChild(path);
+                    
+                    customerBtn.appendChild(countSpan);
+                    customerBtn.appendChild(arrow);
+                } else if (checkedCount === 1) {
+                    // Show single customer with logo and name
+                    const checkedItem = checkedBoxes[0].closest('.customer-item');
+                    const customerLogo = checkedItem.querySelector('.customer-logo');
+                    const customerName = checkedItem.querySelector('span').textContent;
+                    
+                    // Clone the logo
+                    const logoClone = customerLogo.cloneNode(true);
+                    logoClone.style.width = '20px';
+                    logoClone.style.height = '20px';
+                    
+                    // Create name span
+                    const nameSpan = document.createElement('span');
+                    nameSpan.className = 'customer-count';
+                    nameSpan.textContent = customerName;
+                    
+                    // Create dropdown arrow
+                    const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                    arrow.setAttribute('width', '10');
+                    arrow.setAttribute('height', '6');
+                    arrow.setAttribute('viewBox', '0 0 10 6');
+                    arrow.setAttribute('fill', 'none');
+                    arrow.classList.add('dropdown-arrow');
+                    
+                    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                    path.setAttribute('d', 'M1 1L5 5L9 1');
+                    path.setAttribute('stroke', 'currentColor');
+                    path.setAttribute('stroke-width', '1.5');
+                    path.setAttribute('stroke-linecap', 'round');
+                    path.setAttribute('stroke-linejoin', 'round');
+                    arrow.appendChild(path);
+                    
+                    customerBtn.appendChild(logoClone);
+                    customerBtn.appendChild(nameSpan);
+                    customerBtn.appendChild(arrow);
+                } else {
+                    // Show count
+                    const countSpan = document.createElement('span');
+                    countSpan.className = 'customer-count';
+                    countSpan.textContent = `${checkedCount} Customer${checkedCount !== 1 ? 's' : ''}`;
+                    
+                    const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                    arrow.setAttribute('width', '10');
+                    arrow.setAttribute('height', '6');
+                    arrow.setAttribute('viewBox', '0 0 10 6');
+                    arrow.setAttribute('fill', 'none');
+                    arrow.classList.add('dropdown-arrow');
+                    
+                    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                    path.setAttribute('d', 'M1 1L5 5L9 1');
+                    path.setAttribute('stroke', 'currentColor');
+                    path.setAttribute('stroke-width', '1.5');
+                    path.setAttribute('stroke-linecap', 'round');
+                    path.setAttribute('stroke-linejoin', 'round');
+                    arrow.appendChild(path);
+                    
+                    customerBtn.appendChild(countSpan);
+                    customerBtn.appendChild(arrow);
+                }
+            }
+        }
+    }
+    
+    // Toggle data sources dropdown
+    if (sourcesBtn && sourcesDropdown) {
+        sourcesBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            sourcesDropdown.classList.toggle('active');
+            // Close customer dropdown if open
+            if (customerDropdown) customerDropdown.classList.remove('active');
+        });
+        
+        // Prevent dropdown from closing when clicking inside
+        sourcesDropdown.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+        
+        // Search functionality
+        if (sourcesSearch) {
+            sourcesSearch.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const sourceItems = document.querySelectorAll('.source-item');
+                
+                sourceItems.forEach(item => {
+                    const text = item.querySelector('span').textContent.toLowerCase();
+                    if (text.includes(searchTerm)) {
+                        item.style.display = 'flex';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        }
+    }
 
     // Search functionality
     function handleSearch(query) {
@@ -314,42 +438,77 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Integrations Button
-    integrationsBtn.addEventListener('click', () => {
-        // Close OM1 popup if open
-        om1Popup.classList.remove('active');
-        
-        // Toggle integrations popup
-        integrationsPopup.classList.add('active');
-    });
+    if (integrationsBtn && integrationsPopup) {
+        integrationsBtn.addEventListener('click', () => {
+            // Close sources dropdown if open
+            if (sourcesDropdown) sourcesDropdown.classList.remove('active');
+            
+            // Toggle integrations popup
+            integrationsPopup.classList.add('active');
+        });
+    }
     
     // Close Integrations Popup Button
-    closeIntegrationsBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        integrationsPopup.classList.remove('active');
-    });
+    if (closeIntegrationsBtn) {
+        closeIntegrationsBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            integrationsPopup.classList.remove('active');
+        });
+    }
     
-    // Close popup when clicking outside
+    // Close dropdowns when clicking outside
     document.addEventListener('click', (e) => {
-        // For OM1 popup
-        if (om1Popup.classList.contains('active') && 
-            !om1Popup.contains(e.target) && 
-            !orgMemoryToggle.contains(e.target)) {
-            om1Popup.classList.remove('active');
+        // For customer dropdown
+        if (customerDropdown && customerDropdown.classList.contains('active') && 
+            !customerDropdown.contains(e.target) && 
+            !customerBtn.contains(e.target)) {
+            customerDropdown.classList.remove('active');
+        }
+        
+        // For data sources dropdown
+        if (sourcesDropdown && sourcesDropdown.classList.contains('active') && 
+            !sourcesDropdown.contains(e.target) && 
+            !sourcesBtn.contains(e.target)) {
+            sourcesDropdown.classList.remove('active');
         }
         
         // For integrations popup
-        if (integrationsPopup.classList.contains('active') && 
+        if (integrationsPopup && integrationsPopup.classList.contains('active') && 
             !integrationsPopup.contains(e.target) && 
             !integrationsBtn.contains(e.target)) {
             integrationsPopup.classList.remove('active');
         }
     });
     
-    // Close popups with Escape key
+    // Meeting Prep Popup handlers
+    if (prepareBtn && prepOverlay) {
+        prepareBtn.addEventListener('click', () => {
+            prepOverlay.classList.add('active');
+        });
+    }
+    
+    if (closePrepBtn && prepOverlay) {
+        closePrepBtn.addEventListener('click', () => {
+            prepOverlay.classList.remove('active');
+        });
+    }
+    
+    // Close popup when clicking overlay
+    if (prepOverlay) {
+        prepOverlay.addEventListener('click', (e) => {
+            if (e.target === prepOverlay) {
+                prepOverlay.classList.remove('active');
+            }
+        });
+    }
+    
+    // Close dropdowns with Escape key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
-            om1Popup.classList.remove('active');
-            integrationsPopup.classList.remove('active');
+            if (customerDropdown) customerDropdown.classList.remove('active');
+            if (sourcesDropdown) sourcesDropdown.classList.remove('active');
+            if (integrationsPopup) integrationsPopup.classList.remove('active');
+            if (prepOverlay) prepOverlay.classList.remove('active');
         }
     });
 
@@ -361,42 +520,6 @@ document.addEventListener('DOMContentLoaded', function() {
     searchInput.addEventListener('blur', () => {
         searchInput.style.transform = '';
     });
-    
-    // Mobile enhancements
-    
-    // Improve scrolling for category nav on mobile
-    let isScrolling = false;
-    
-    // Helper function to check if device is mobile
-    function isMobile() {
-        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
-    }
-    
-    // Smooth scroll to centered active category button
-    function scrollActiveCategoryIntoView() {
-        if (!categoryNav) return;
-        
-        const activeBtn = categoryNav.querySelector('.active');
-        if (!activeBtn) return;
-        
-        // Don't scroll on desktop
-        if (!isMobile()) return;
-        
-        // Calculate the scroll position to center the active button
-        const navWidth = categoryNav.offsetWidth;
-        const btnLeft = activeBtn.offsetLeft;
-        const btnWidth = activeBtn.offsetWidth;
-        const scrollPos = btnLeft - (navWidth / 2) + (btnWidth / 2);
-        
-        // Scroll smoothly to position
-        categoryNav.scrollTo({
-            left: scrollPos,
-            behavior: 'smooth'
-        });
-    }
-    
-    // Call on page load
-    setTimeout(scrollActiveCategoryIntoView, 300);
     
     // Prevent accidental page zoom when tapping quickly on mobile
     document.addEventListener('touchend', (e) => {
@@ -411,25 +534,4 @@ document.addEventListener('DOMContentLoaded', function() {
             e.target._lastTouch = now;
         }
     }, false);
-    
-    // Add overscroll capability to category nav
-    if (categoryNav && isMobile()) {
-        categoryNav.style.WebkitOverflowScrolling = 'touch';
-    }
-    
-    // Improve task card touch response
-    const taskCards = document.querySelectorAll('.task-card');
-    taskCards.forEach(card => {
-        card.addEventListener('touchstart', () => {
-            card.classList.add('touch-active');
-        });
-        
-        card.addEventListener('touchend', () => {
-            card.classList.remove('touch-active');
-        });
-        
-        card.addEventListener('touchcancel', () => {
-            card.classList.remove('touch-active');
-        });
-    });
 }); 
