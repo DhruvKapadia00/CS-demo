@@ -28,10 +28,11 @@ body {
     justify-content: center;
     align-items: flex-start;
     padding: 15px 10px 0;
-    overflow-x: hidden;
+    overflow: hidden;
     width: 100%;
     position: relative;
     font-size: 14px;
+    height: 100vh;
 }
 
 .app-container {
