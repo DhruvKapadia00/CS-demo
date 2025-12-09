@@ -188,11 +188,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const sendButton = document.querySelector('.send-btn');
     const micButton = document.querySelector('.mic-btn');
     
-    // Meeting Prep Popup Elements
-    const prepareBtn = document.querySelector('.prepare-btn');
-    const prepOverlay = document.getElementById('meeting-prep-overlay');
-    const closePrepBtn = document.getElementById('close-prep-modal');
-    
     // Customer Selector Dropdown
     const customerBtn = document.getElementById('customer-selector-btn');
     const customerDropdown = document.getElementById('customer-dropdown');
@@ -480,35 +475,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Meeting Prep Popup handlers
-    if (prepareBtn && prepOverlay) {
-        prepareBtn.addEventListener('click', () => {
-            prepOverlay.classList.add('active');
-        });
-    }
-    
-    if (closePrepBtn && prepOverlay) {
-        closePrepBtn.addEventListener('click', () => {
-            prepOverlay.classList.remove('active');
-        });
-    }
-    
-    // Close popup when clicking overlay
-    if (prepOverlay) {
-        prepOverlay.addEventListener('click', (e) => {
-            if (e.target === prepOverlay) {
-                prepOverlay.classList.remove('active');
-            }
-        });
-    }
-    
     // Close dropdowns with Escape key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             if (customerDropdown) customerDropdown.classList.remove('active');
             if (sourcesDropdown) sourcesDropdown.classList.remove('active');
             if (integrationsPopup) integrationsPopup.classList.remove('active');
-            if (prepOverlay) prepOverlay.classList.remove('active');
         }
     });
 
