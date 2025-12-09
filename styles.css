@@ -562,7 +562,7 @@ body {
 .insights-section {
     display: grid !important;
     grid-template-columns: 1fr 1fr 1fr !important;
-    grid-auto-flow: column !important;
+    grid-auto-flow: row !important;
     gap: 12px;
     margin-top: 24px;
     width: 100%;
@@ -1229,7 +1229,8 @@ body {
     }
     
     .insights-section {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
+        grid-auto-flow: row !important;
         gap: 8px;
         justify-items: center;
     }
